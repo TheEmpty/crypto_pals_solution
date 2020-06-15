@@ -41,32 +41,32 @@ fn main() -> Result<(), std::num::ParseIntError> {
   let hex = hex_to_u8("49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d")?;
   let result11 = hex_to_base64(hex);
   assert_eq!(result11, "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t");
-  println!("1.1 base64: {:?}", result11);
+  println!("1.1 base64: {}", result11);
 
   // 1.2
   let first = hex_to_u8("1c0111001f010100061a024b53535009181c")?;
   let second = hex_to_u8("686974207468652062756c6c277320657965")?;
   let result12 = u8_to_hex(fixed_xor(first, second));
   assert_eq!(result12, "746865206b696420646f6e277420706c6179");
-  println!("1.2 fixed xor: {:?}", result12);
+  println!("1.2 fixed xor: {}", result12);
 
   // 1.3
   let input = hex_to_u8("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")?;
   let result13 = crack_single_byte_xor(input);
   assert_eq!(result13, "Cooking MC\'s like a pound of bacon");
-  println!("1.3 cracking single byte xor: {:?}", result13);
+  println!("1.3 cracking single byte xor: {}", result13);
 
   // 1.4
   let result14 = one_point_four();
   assert_eq!(result14, "Now that the party is jumping\n");
-  println!("1.4 scoring scores: {:?}", result14);
+  println!("1.4 scoring scores: {}", result14.trim_end());
 
-  // 1.5 - follow up
+  // 1.5
   let key = "ICE".as_bytes().to_vec();
   let secret15 = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal".as_bytes().to_vec();
   let encrypted15 = u8_to_hex(repeating_key_xor(&key, secret15));
   assert_eq!(encrypted15, "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f");
-  println!("1.5 repeating key XOR: {:?}", encrypted15);
+  println!("1.5 repeating key XOR: {}", encrypted15);
 
   Ok(())
 }
